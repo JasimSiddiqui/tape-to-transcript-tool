@@ -1,0 +1,4 @@
+# Versions the app was built and tested with.
+faster-whisper==1.2.1
+PySide6==6.11.2
+pyinstaller==6.22.3
