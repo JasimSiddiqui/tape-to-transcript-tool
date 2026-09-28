@@ -43,6 +43,8 @@ videos into text you can skim, search, and quote in your notes.
 
 ## Install (Windows 10/11)
 
+**Download page: [tapetotranscript.vercel.app](https://tapetotranscript.vercel.app/)**
+
 No Python, no terminal. Just download and run. Grab
 **[`TapeToTranscriptTool-Setup.exe`](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest/download/TapeToTranscriptTool-Setup.exe)**
 (about 90 MB) from the
