@@ -1,7 +1,6 @@
 @echo off
-rem Packages the build from build.bat into release files in dist\:
-rem   TapeToTranscriptTool-Portable.zip  (always)
-rem   TapeToTranscriptTool-Setup.exe     (if Inno Setup 6 is installed)
+rem Builds the Windows installer, dist\TapeToTranscriptTool-Setup.exe,
+rem from the build made by build.bat. Requires Inno Setup 6.
 setlocal
 cd /d "%~dp0"
 
@@ -10,25 +9,21 @@ if not exist "dist\TapeToTranscriptTool\TapeToTranscriptTool.exe" (
     exit /b 1
 )
 
-echo Creating portable zip...
-if exist "dist\TapeToTranscriptTool-Portable.zip" del "dist\TapeToTranscriptTool-Portable.zip"
-tar -a -cf "dist\TapeToTranscriptTool-Portable.zip" -C dist TapeToTranscriptTool || goto :error
-
 set "ISCC="
 for %%P in ("%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe" "%ProgramFiles%\Inno Setup 6\ISCC.exe" "%LocalAppData%\Programs\Inno Setup 6\ISCC.exe") do (
     if not defined ISCC if exist %%P set "ISCC=%%~P"
 )
 if not defined ISCC (
-    echo Inno Setup 6 not found, skipping the installer. Get it from https://jrsoftware.org/isinfo.php
-    goto :done
+    echo Inno Setup 6 was not found. Install it from https://jrsoftware.org/isinfo.php
+    echo or run: winget install JRSoftware.InnoSetup
+    exit /b 1
 )
 
 echo Building installer...
 "%ISCC%" /Q installer.iss || goto :error
 
-:done
 echo.
-echo Release files are in dist\
+echo Installer created: dist\TapeToTranscriptTool-Setup.exe
 exit /b 0
 
 :error

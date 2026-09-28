@@ -33,7 +33,7 @@ from PySide6.QtWidgets import (
 
 from .. import APP_NAME, APP_VERSION
 from ..database import Database
-from ..formatting import SUMMARY_PROMPT, build_text, format_duration
+from ..formatting import build_text, format_duration
 from ..paths import database_path, log_path, models_dir, setup_logging
 from ..settings import load_settings, save_settings
 from ..transcriber import TranscriptionWorker
@@ -294,29 +294,21 @@ class MainWindow(QMainWindow):
         meta_row.addWidget(self.meta_label, 1)
         meta_row.addWidget(self.timestamps_check)
 
-        self.prompt_button = QPushButton("Copy with Prompt")
-        self.prompt_button.setToolTip(
-            "Copies the transcript with a request to summarize its key concepts, "
-            "definitions and examples, ready to paste into an AI chat."
-        )
-        self.prompt_button.clicked.connect(self._copy_with_prompt)
-        self.copy_button = self._secondary_button("Copy", self._copy_plain)
+        self.copy_button = QPushButton("Copy")
+        self.copy_button.setCursor(Qt.PointingHandCursor)
+        self.copy_button.clicked.connect(self._copy_plain)
+        # Keep the width steady when the text briefly changes to "Copied!".
+        self.copy_button.setText("Copied!")
+        copied_width = self.copy_button.sizeHint().width()
+        self.copy_button.setText("Copy")
+        self.copy_button.setMinimumWidth(max(self.copy_button.sizeHint().width(), copied_width))
         download_button = self._secondary_button("Download .txt", self._download_txt)
         rename_button = self._secondary_button("Rename", self._rename)
         delete_button = self._secondary_button("Delete", self._delete)
         delete_button.setProperty("variant", "danger")
-        for button in (self.prompt_button, self.copy_button):
-            # Keep the width steady when the text briefly changes to "Copied!".
-            text = button.text()
-            button.setText("Copied!")
-            copied_width = button.sizeHint().width()
-            button.setText(text)
-            button.setMinimumWidth(max(button.sizeHint().width(), copied_width))
-        self.prompt_button.setCursor(Qt.PointingHandCursor)
 
         actions = QHBoxLayout()
         actions.setSpacing(8)
-        actions.addWidget(self.prompt_button)
         actions.addWidget(self.copy_button)
         actions.addWidget(download_button)
         actions.addStretch(1)
@@ -557,12 +549,6 @@ class MainWindow(QMainWindow):
             return
         QGuiApplication.clipboard().setText(self._current_text())
         self._flash(self.copy_button)
-
-    def _copy_with_prompt(self):
-        if self.current_transcript_id is None or self.prompt_button.text() == "Copied!":
-            return
-        QGuiApplication.clipboard().setText(SUMMARY_PROMPT + self._current_text())
-        self._flash(self.prompt_button)
 
     def _download_txt(self):
         if self.current_transcript_id is None:

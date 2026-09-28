@@ -28,14 +28,14 @@ slow, and most transcription services want an account, an upload, and a monthly
 fee, which isn't great for recordings you may not be allowed to share.
 
 Tape to Transcript Tool keeps everything on your machine and turns a folder of
-videos into text you can skim, search, and paste into your notes or an AI chat.
+videos into text you can skim, search, and quote in your notes.
 
 ## Features
 
 - **Batch queue**: add as many videos or audio files as you like (mp4, mkv, mov, webm, avi, m4a, mp3, wav). They transcribe one at a time in the background with a live progress bar. Cancel the current file or remove queued ones at any point.
 - **Fully offline**: a local Whisper model via [faster-whisper](https://github.com/SYSTRAN/faster-whisper). Your recordings never leave your computer. No FFmpeg install needed.
 - **Saved and searchable**: every transcript is stored automatically. Search across titles *and* full text to find the lecture where something came up.
-- **Copy, copy with prompt, or download**: copy the plain text, copy it with a "summarize the key concepts, definitions, and examples" prompt in front, or save it as a `.txt`.
+- **Copy or download**: copy a transcript to the clipboard in one click, or save it as a `.txt` file.
 - **Timestamps on demand**: toggle `[HH:MM:SS]` timestamps per line at any time, even for transcripts made earlier.
 - **Skips the silence**: voice-activity detection skips pauses, which is faster and helps avoid made-up text during silence.
 - **Uses your GPU if it can**: an NVIDIA GPU is used automatically when available; if anything goes wrong it falls back to the CPU and keeps going.
@@ -43,13 +43,13 @@ videos into text you can skim, search, and paste into your notes or an AI chat.
 
 ## Install (Windows 10/11)
 
-No Python, no terminal. Just download and run. Grab a build from the
-[**Releases**](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest) page:
-
-| | What it does |
-| --- | --- |
-| **`TapeToTranscriptTool-Setup.exe`** (recommended) | Double-click to install. Installs per-user (no admin prompt), drops a **Tape to Transcript Tool** shortcut on your desktop, and adds an uninstall entry to Add/Remove Programs. |
-| **`TapeToTranscriptTool-Portable.zip`** | Unzip anywhere and run `TapeToTranscriptTool.exe`; nothing is installed. Keep the whole folder together. |
+No Python, no terminal. Just download and run. Grab
+**[`TapeToTranscriptTool-Setup.exe`](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest/download/TapeToTranscriptTool-Setup.exe)**
+(about 90 MB) from the
+[**Releases**](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest) page
+and double-click it. It installs per-user (no admin prompt), puts a
+**Tape to Transcript Tool** shortcut on your desktop, and adds an uninstall entry to
+Add/Remove Programs.
 
 **First launch:** the app isn't code-signed yet, so Windows SmartScreen shows
 *"Windows protected your PC."* Click **More info → Run anyway**. You only see
@@ -128,10 +128,10 @@ rem Or run straight from source (after build.bat has created .venv)
 ```
 
 `build.bat` produces `dist\TapeToTranscriptTool\TapeToTranscriptTool.exe`, a
-one-folder, windowed build. To make the release files, run `package.bat`
-afterwards: it creates `TapeToTranscriptTool-Portable.zip` and, if
-[Inno Setup 6](https://jrsoftware.org/isinfo.php) is installed,
-`TapeToTranscriptTool-Setup.exe` from [`installer.iss`](installer.iss).
+one-folder, windowed build. To make the installer, install
+[Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup`)
+and run `package.bat`; it builds `dist\TapeToTranscriptTool-Setup.exe` from
+[`installer.iss`](installer.iss).
 
 ## How it works
 

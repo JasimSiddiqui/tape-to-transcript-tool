@@ -3,12 +3,6 @@
 # Plain-text transcripts start a new paragraph after about this many seconds.
 PARAGRAPH_SECONDS = 60
 
-# Prepended by "Copy with Prompt" so the transcript can be pasted straight into an AI chat.
-SUMMARY_PROMPT = (
-    "Below is a transcript of a course lecture. Summarize the key concepts, "
-    "definitions, and any examples, organized by topic.\n\n"
-)
-
 
 def format_timestamp(seconds):
     seconds = int(seconds)
