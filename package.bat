@@ -1,6 +1,7 @@
 @echo off
-rem Builds the Windows installer, dist\TapeToTranscriptTool-Setup.exe,
-rem from the build made by build.bat. Requires Inno Setup 6.
+rem Packages the build from build.bat into release files in dist\:
+rem   TapeToTranscriptTool-Setup.exe     (installer, requires Inno Setup 6)
+rem   TapeToTranscriptTool-Portable.zip  (unzip and run, nothing installed)
 setlocal
 cd /d "%~dp0"
 
@@ -22,8 +23,12 @@ if not defined ISCC (
 echo Building installer...
 "%ISCC%" /Q installer.iss || goto :error
 
+echo Creating portable zip...
+if exist "dist\TapeToTranscriptTool-Portable.zip" del "dist\TapeToTranscriptTool-Portable.zip"
+tar -a -cf "dist\TapeToTranscriptTool-Portable.zip" -C dist TapeToTranscriptTool || goto :error
+
 echo.
-echo Installer created: dist\TapeToTranscriptTool-Setup.exe
+echo Release files are in dist\
 exit /b 0
 
 :error

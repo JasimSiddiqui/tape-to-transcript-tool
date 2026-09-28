@@ -45,13 +45,14 @@ videos into text you can skim, search, and quote in your notes.
 
 **Download page: [tapetotranscript.vercel.app](https://tapetotranscript.vercel.app/)**
 
-No Python, no terminal. Just download and run. Grab
-**[`TapeToTranscriptTool-Setup.exe`](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest/download/TapeToTranscriptTool-Setup.exe)**
-(about 90 MB) from the
-[**Releases**](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest) page
-and double-click it. It installs per-user (no admin prompt), puts a
-**Tape to Transcript Tool** shortcut on your desktop, and adds an uninstall entry to
-Add/Remove Programs.
+No Python, no terminal. Just download and run. Grab a build from the download page
+above or straight from the
+[**Releases**](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest) page:
+
+| | What it does |
+| --- | --- |
+| **[`TapeToTranscriptTool-Setup.exe`](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest/download/TapeToTranscriptTool-Setup.exe)** (recommended, ~90 MB) | Double-click to install. Installs per-user (no admin prompt), puts a **Tape to Transcript Tool** shortcut on your desktop, and adds an uninstall entry to Add/Remove Programs. |
+| **[`TapeToTranscriptTool-Portable.zip`](https://github.com/JasimSiddiqui/tape-to-transcript-tool/releases/latest/download/TapeToTranscriptTool-Portable.zip)** (~130 MB) | Unzip anywhere and run `TapeToTranscriptTool.exe`; nothing is installed. Keep the whole folder together. |
 
 **First launch:** the app isn't code-signed yet, so Windows SmartScreen shows
 *"Windows protected your PC."* Click **More info → Run anyway**. You only see
@@ -133,7 +134,7 @@ rem Or run straight from source (after build.bat has created .venv)
 one-folder, windowed build. To make the installer, install
 [Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup`)
 and run `package.bat`; it builds `dist\TapeToTranscriptTool-Setup.exe` from
-[`installer.iss`](installer.iss).
+[`installer.iss`](installer.iss) and `dist\TapeToTranscriptTool-Portable.zip`.
 
 ## How it works
 
